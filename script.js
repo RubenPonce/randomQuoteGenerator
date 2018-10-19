@@ -3,7 +3,7 @@
 // Create the array of quote objects and name it quotes
 //quotes[quote, source]
 var quotes = [
-    {quote: "Unfortunately what is little recognized is that the most worthwhile scientific books are those in which the source clearly indicates what he does not know; for an source most hurts his readers by concealing difficulties",
+    {quote: "There are those who are destined to do good but never to experience it. I do believe I am one of them",
     source: "Evariste Galois",
     citation: "The Last Letter of Galois",
     year: "1832",
@@ -26,7 +26,7 @@ var quotes = [
     source: "Rock Lee",
     citation: "The Last: Naruto The Movie",
     year: "2014",
-    tags:["Anime ", "Best Anime Character of All Time", "Perseverance"]},
+    tags:["Anime ", "Best Anime Character", "Perseverance"]},
 
     {quote: "I have to work harder than anyone else to make it! I'll never catch up otherwise...! I want to be like you...! Like you. The strongest hero.",
     source: "Midoriya Izuku",
@@ -36,14 +36,14 @@ var quotes = [
     source: "Charles Duhigg",
     citation: "The Power of Habit",
     year: "2012",
-    tags: ["Motivational", "Habits","Great Selfdevelopment Writers"]
+    tags: ["Motivational", "Habits","Self-development "]},
 
     {quote: "If we remain comfortable at a company as developers, we will stop growing.",
     source: "Chris Stone",
     citation: "Youtube: Why I left My First Developer Job",
     year: "2018",
     tags: ["Motivational", "Youtube", "Web Developer"]}
-  }
+
 ];
 
 
@@ -51,53 +51,57 @@ var quotes = [
 
 let quoteBox = document.querySelector(".quote");
 let author = document.querySelector(".source");
+let citedBy = document.querySelector(".citation");
+let date = document.querySelector(".year");
 let button = document.getElementById('loadQuote');
 
 
+
 //generates random background color with hexdecimal, found on StackOverFlow by user l2m2 "https://stackoverflow.com/questions/1484506/random-color-generator/37281143"
-function randomNumberGenerator()
+function randomColorGenerator()
   {var randomNumber = ((Math.random()+2)*16777216|0).toString(16).slice(1);
     return "#"+randomNumber;
   }
 
-
-
-
 //standard random Number generator in Javascript, but range of number is between 0 and length of array
-function getRandomQuote(){
-  var randomNumber = Math.floor(Math.random() * quotes.length );
+function getRandomQuote(array){
+  var randomNumber = Math.floor(Math.random() * array.length );
   console.log(randomNumber);
-  return randomNumber;
+  return array[randomNumber]
 }
 
-
+//conditional statements to check for objects of citation, year, and tags.
 function printQuote(){//begin printQuote()
-  var arrayPosition = getRandomQuote();
-  quoteBox.innerHTML = quotes[arrayPosition].quote;
-  author.innerHTML = quotes[arrayPosition].source;
+  var randomQuote = getRandomQuote(quotes);
+  quoteBox.innerHTML = randomQuote.quote;
+  author.innerHTML = randomQuote.source;
 
-  if(quotes[arrayPosition].citation){
-    author.innerHTML+= "<span class = 'citation'>" + quotes[arrayPosition].citation+"</span>";
-  }if(quotes[arrayPosition].year){
-    author.innerHTML+= "<span class = 'year'>" + quotes[arrayPosition].year+"</span>";
-  }if(quotes[arrayPosition].tags){
-    for(i=0; i<quotes[arrayPosition].tags.length; i++)
+  if(randomQuote.citation){
+    author.innerHTML+= "<span class = 'citation'>" + randomQuote.citation+"</span>";
+  }if(randomQuote.year){
+    author.innerHTML+= "<span class = 'year'>" + randomQuote.year+"</span>";
+  }if(randomQuote.tags){
+    for(i=0; i<randomQuote.tags.length; i++)
     {
       //generates tags as list array items.
-      author.innerHTML += "<li class = 'tags'> "+ quotes[arrayPosition].tags[i]+"</li>";
-      document.querySelectorAll('.tags')[i].style.backgroundColor = randomNumberGenerator();
+      author.innerHTML += "<li class = 'tags'> "+ randomQuote.tags[i]+"</li>";
+      document.querySelectorAll('.tags')[i].style.backgroundColor = randomColorGenerator();
     }
   }
   //Change background of Button and Body
-  document.body.style.backgroundColor = randomNumberGenerator();
-  button.style.backgroundColor = randomNumberGenerator();
+  var randomColor = randomColorGenerator();
+  document.body.style.backgroundColor = randomColor;
+  button.style.backgroundColor = randomColor;
 
 }//end printQuote()
+
 //displays new quote every 10 seconds
   setInterval(() => {
     printQuote();
-  }, 15000);
+  }, 10000);
 
+//initiate the first quote generation
+printQuote();
 
 // This event listener will respond to "Show another quote" button clicks
 // when user clicks anywhere on the button, the "printQuote" function is called
