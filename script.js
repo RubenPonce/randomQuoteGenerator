@@ -66,12 +66,12 @@ function randomColorGenerator()
 //standard random Number generator in Javascript, but range of number is between 0 and length of array
 function getRandomQuote(array){
   var randomNumber = Math.floor(Math.random() * array.length );
-  console.log(randomNumber);
   return array[randomNumber]
 }
 
 //conditional statements to check for objects of citation, year, and tags.
-function printQuote(){//begin printQuote()
+function printQuote()
+{//begin printQuote()
   var randomQuote = getRandomQuote(quotes);
   quoteBox.innerHTML = randomQuote.quote;
   author.innerHTML = randomQuote.source;
@@ -88,10 +88,17 @@ function printQuote(){//begin printQuote()
       document.querySelectorAll('.tags')[i].style.backgroundColor = randomColorGenerator();
     }
   }
-  //Change background of Button and Body
-  var randomColor = randomColorGenerator();
-  document.body.style.backgroundColor = randomColor;
-  button.style.backgroundColor = randomColor;
+//Change background of Button and Body
+var randomColor = randomColorGenerator();
+document.body.style.backgroundColor = randomColor;
+  //retains the button's opacity upon changing background color.
+button.style.backgroundColor = randomColor;
+  button.addEventListener('mouseover', ()=> {
+    button.style.opacity = ".25";
+  })
+  button.addEventListener('mouseout', ()=> {
+    button.style.opacity = "1";
+  })
 
 }//end printQuote()
 
