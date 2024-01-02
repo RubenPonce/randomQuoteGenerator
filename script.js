@@ -2,10 +2,10 @@
 
 // Create the array of quote objects and name it quotes
 //quotes[quote, source]
-var quotes = [
+const quotes = [
     {quote: "There are those who are destined to do good but never to experience it. I do believe I am one of them",
     source: "Evariste Galois",
-    citation: "The Last Letter of Galois",
+    citation: "The Last constter of Galois",
     year: "1832",
     tags: ["History ","Math ","Genius"]
   },
@@ -49,11 +49,11 @@ var quotes = [
 
 
 
-let quoteBox = document.querySelector(".quote");
-let author = document.querySelector(".source");
-let citedBy = document.querySelector(".citation");
-let date = document.querySelector(".year");
-let button = document.getElementById('loadQuote');
+const quoteBox = document.querySelector(".quote");
+const author = document.querySelector(".source");
+const citedBy = document.querySelector(".citation");
+const date = document.querySelector(".year");
+const button = document.getElementById('loadQuote');
 
 
 
